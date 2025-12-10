@@ -1,0 +1,41 @@
+1) Do In-Order Traversal of the given tree and store the result in a temp array.
+3) Check if the temp array is sorted in ascending order, if it is, then the tree is BST.
+
+Time Complexity: O(n)
+
+
+
+
+
+
+#include<vector>
+#include<bits/stdc++.h>
+
+void isBSTHelper(BinaryTreeNode<int> *root, vector<int> &v){
+   
+    if(root == NULL){
+       return; 
+    }
+    
+    isBSTHelper(root->left,v);
+    v.push_back(root->data);
+    isBSTHelper(root->right,v);
+}
+
+
+bool isBST(BinaryTreeNode<int> *root){
+       /* Don't write main().
+	* Don't read input, it is passed as function argument.
+	* Return output and don't print it.
+	* Taking input and printing output is handled automatically.
+	*/
+    vector<int> v;
+    isBSTHelper(root,v);
+
+    for(int i=1;i<v.size();i++){
+        if(v[i] < v[i-1]){
+            return false;
+        }
+    }
+    return true;
+}
